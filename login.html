@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server-Stats</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" crossorigin="anonymous" />
+
+    <style>
+        * {
+            padding: 0px;
+        }
+
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            padding-bottom: 80px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            background-color: #f5f5f5;
+        }
+
+        .footer a {
+            color: #007bff;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-right: 0px; " id="nav">
+        <a class=" navbar-brand" id="nav_brand" href="#">Server Stats</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="settings.html">Settings</a>
+                </li> -->
+                <div class="float-right">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Mode Settings
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" id="light" href="">Hell</a>
+                            <a class="dropdown-item" id="darkly" href="">Dunkel</a>
+                            <a class="dropdown-item" id="cyborg" href="">Dunkelst</a>
+                        </div>
+                    </li>
+                </div>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div style="margin-top: 20px;" class="container alert alert-success" id="alert-suc">
+        Default Success Alert
+    </div>
+    <div style="margin-top: 20px;" class="container alert alert-danger" id="alert-dan">
+        Default danger Alert
+    </div>
+
+    <div class="container justify-content-center center">
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Login to the Statistics Panel</h5>
+                    </div>
+                    <div class="card-body" onKeyPress="return checkSubmit(event)">
+                        <h3 class="card-title">Login</h3>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="btn_login">Login</button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+</body>
+
+<footer class="footer fixed-bottom" id="footer">
+    <div class="container">
+        <span class="footer-text">Made with <span style="color: #e25555;">&hearts;</span> by &copy;<a
+                href="http://jodu555.de">Jodu555</a></span>
+    </div>
+</footer>
+
+</html>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script defer src="js/cookies.js"></script>
+<script src="js/darkmode.js"></script>
+<script defer src="js/index.js"></script>
+<script defer src="js/login/login.js"></script>

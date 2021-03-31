@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server-Stats</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" crossorigin="anonymous" />
+
+    <style>
+        * {
+            padding: 0px;
+        }
+
+        h2 {
+            font-size: 2rem !important;
+        }
+
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            padding-bottom: 80px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            background-color: #f5f5f5;
+        }
+
+        .footer a {
+            color: #007bff;
+        }
+
+        .list-group-item {
+            font-size: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-right: 0px; " id="nav">
+        <a class=" navbar-brand" id="nav_brand" href="#">Server Stats</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link active" href="#">Settings</a>
+                </li>
+                <div class="float-right">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Mode Settings
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" id="light" href="">Hell</a>
+                            <a class="dropdown-item" id="darkly" href="">Dunkel</a>
+                            <a class="dropdown-item" id="cyborg" href="">Dunkelst</a>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <button class="btn btn-outline-danger" id="logout" style="margin-right: 20px;">Logout</button>
+
+        </div>
+    </nav>
+    <br>
+
+    <div style="margin-top: 20px;" class="container alert alert-success" id="alert-suc">
+        <strong>Success!</strong> Indicates a successful or positive action.
+    </div>
+    <div style="margin-top: 20px;" class="container alert alert-danger" id="alert-dan">
+        <strong>Success!</strong> Indicates a successful or positive action.
+    </div>
+
+    <div class="row" style="width: 100%;">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <div class="form-group">
+                <label for="maxplayers">Maximale Spieler:&nbsp;&nbsp;</label>
+                <input type="number" style="width: 10vw;" class="form-control" id="maxplayers" onfocusout="save()"
+                    value="10">
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">MOTD Preview</h4>
+                    <hr>
+                    <h5 id="motd_output_line_1">Developed by Jodu555</h5>
+                    <h5 id="motd_output_line_2">Second Line</h5>
+                </div>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Zeile 1</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default" id="motd_input_line_1" onfocusout="save()"
+                    oninput="render()">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Zeile 2</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default" id="motd_input_line_2" onfocusout="save()"
+                    oninput="render()">
+            </div>
+        </div>
+        <div class="col-"></div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row card-title">
+                        <h4 style="padding-left: 20px;">Whitelisted Players</h4><button type="button" onclick="toggleWhitelist()" class="btn btn-danger" style="margin-left: 20px;" id="wl_btn"></button>
+                    </div>
+                     
+                    <hr>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="add_wl_player">
+                        <button style="margin-left: 10px;" type="button" id="btn_add_wl_player"
+                            class="btn btn-success"><i class="fas fa-plus"></i></button>
+                    </div>
+
+                    <ul class="list-group" id="wl">
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-"></div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Operated Players</h4>
+                    <hr>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="add_op_player">
+                        <button style="margin-left: 10px;" type="button" id="btn_add_op_player"
+                            class="btn btn-success"><i class="fas fa-plus"></i></button>
+                    </div>
+
+                    <ul class="list-group" id="op">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+<footer class="footer fixed-bottom" id="footer">
+    <div class="container">
+        <span class="footer-text">Made with <span style="color: #e25555;">&hearts;</span> by &copy;<a
+                href="http://jodu555.de">Jodu555</a></span>
+    </div>
+</footer>
+
+
+</html>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script defer src="js/cookies.js"></script>
+<script src="js/darkmode.js"></script>
+<script defer src="js/index.js"></script>
+<script defer src="js/settings/MinecraftColorTranslator.js"></script>
+<script defer src="js/settings/updater.js"></script>
+<script defer src="js/settings/settings.js"></script>

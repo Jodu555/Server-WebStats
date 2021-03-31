@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server-Stats</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" crossorigin="anonymous" />
+
+    <style>
+        * {
+            padding: 0px;
+        }
+
+        .console {
+            overflow: scroll;
+            overflow-x: auto;
+            overflow-y: auto;
+            height: 480px;
+        }
+
+
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            padding-bottom: 80px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            background-color: #f5f5f5;
+        }
+
+        .footer a {
+            color: #007bff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-right: 0px; " id="nav">
+        <a class=" navbar-brand" id="nav_brand" href="#">Server Stats</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="settings.html">Settings</a>
+                </li>
+                <div class="float-right">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Mode Settings
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" id="light" href="">Hell</a>
+                            <a class="dropdown-item" id="darkly" href="">Dunkel</a>
+                            <a class="dropdown-item" id="cyborg" href="">Dunkelst</a>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <button class="btn btn-outline-danger" id="logout" style="margin-right: 20px;">Logout</button>
+        </div>
+    </nav>
+    <div style="margin-top: 20px;" class="container alert alert-success" id="alert-suc">
+        <strong>Success!</strong> Indicates a successful or positive action.
+    </div>
+    <div style="margin-top: 20px;" class="container alert alert-danger" id="alert-dan">
+        <strong>Success!</strong> Indicates a successful or positive action.
+    </div>
+
+
+    <div class="row" style="margin: 0;">
+        <div class="col-1"></div>
+        <div class="col-7">
+            <br>
+            <br>
+            <div class="row justify-content-center align-items-center">
+                <div class="col-3">
+                    <div class="card">
+                        <h5 class="card-title text-center">Online Players</h5>
+                        <h6 class="card-subtitle mb-2 text-muted text-center" id="playerCounter">-1 / Infinity</h6>
+                        <div class="card-body">
+                            <div class="progress">
+                                <div class="progress-bar" id="player_bar" role="progressbar" style="width: 100%;"
+                                    aria-valuemin="0" aria-valuemax="20">100%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-"></div>
+                <div class="col-3">
+                    <div class="card">
+                        <h5 class="card-title text-center">TPS Usage</h5>
+                        <h6 class="card-subtitle mb-2 text-muted text-center" id="tpsCounter">20</h6>
+                        <div class="card-body">
+                            <div class="progress">
+                                <div class="progress-bar" id="tps_bar" role="progressbar" style="width: 100%;"
+                                    aria-valuemin="0" aria-valuemax="20">100%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-"></div>
+                <div class="col-3">
+                    <div class="card">
+                        <h5 class="card-title text-center">CPU Usage</h5>
+                        <h6 class="card-subtitle mb-2 text-muted text-center" id="cpuInfo">100%</h6>
+                        <div class="card-body">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" id="cpu_bar" style="width: 100%;"
+                                    aria-valuemin="0" aria-valuemax="100">100%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-"></div>
+                <div class="col-3">
+                    <div class="card">
+                        <h5 class="card-title text-center">RAM Usage</h5>
+                        <h6 class="card-subtitle mb-2 text-muted text-center" id="ramInfo">-1MB / 512MB</h6>
+                        <div class="card-body">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" id="ram_bar" style="width: 100%;"
+                                    aria-valuemin="0" aria-valuemax="100">100%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <div class="console" id="consoleTextArea">
+
+            </div>
+            <br>
+
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <input type="text" class="form-control" id="command_line" placeholder="Enter command">
+                </div>
+                <div class="col-">
+                    <button type="submit" id="send_command" class="btn btn-primary">Senden</button>
+                </div>
+                <div class="col-"></div>
+                <div class="col-1">
+                    <button type="button" class="btn btn-outline-danger" id="console_lock">
+                        <i class="fas fa-lock"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="col-2">
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title" id="playerOnline">Spieler Online</h2>
+
+                    <input type="text" class="form-control" placeholder="Filter" id="filter" onkeyup="filter()"
+                        oninput="filter()">
+                    <br>
+                    <div class="list-group" id="list-tab" role="tablist">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center" id="interactions" style="font-size: 2rem;">Interaktions-Menü</h2>
+                    <div class="tab-content" id="nav-tabContent">
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="col-2">
+            <br>
+            <h1 class="text-center" id="playerOnline" style="font-size: 2.5rem;">Spieler Online</h1>
+            <input type="text" class="form-control" placeholder="Filter" id="filter" onkeyup="filter()"
+                oninput="filter()">
+            <br>
+            <div class="list-group" id="list-tab" role="tablist">
+            </div>
+        </div>
+
+        <div class="col-2">
+            <br>
+            <h2 class="text-center" id="interaction" style="font-size: 2rem;">Interaktions-Menü</h2>
+            <div class="tab-content" id="nav-tabContent">
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<footer class="footer fixed-bottom" id="footer">
+    <div class="container">
+        <span class="footer-text">Made with <span style="color: #e25555;">&hearts;</span> by &copy;<a
+                href="http://jodu555.de">Jodu555</a></span>
+    </div>
+</footer>
+
+</html>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script defer src="js/cookies.js"></script>
+<script src="js/darkmode.js"></script>
+<script defer src="js/index/updater.js"></script>
+<script defer src="js/index.js"></script>
+<script defer src="js/index/main.js"></script>
+<script defer src="js/index/console.js"></script>
+<script defer src="js/index/player.js"></script>
