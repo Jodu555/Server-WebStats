@@ -19,12 +19,12 @@ document.getElementById('btn_add_wl_player').addEventListener('click', () => {
 
 document.getElementById('btn_add_op_player').addEventListener('click', () => {
     var element = document.getElementById('add_op_player');
-    sendCommand('deop ' + element.value);
+    sendCommand('op ' + element.value);
     load()
 });
 
 function toggleWhitelist() {
-    if(whitelist) {
+    if (whitelist) {
         sendCommand('whitelist off');
     } else {
         sendCommand('whitelist on');
@@ -34,7 +34,8 @@ function toggleWhitelist() {
 
 function save() {
 
-    
+    //MOTD
+    //MaxPlayers
 
     load();
 }
@@ -42,4 +43,3 @@ function save() {
 setInterval(() => {
     loadLists();
 }, 1000);
-
