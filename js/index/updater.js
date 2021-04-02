@@ -1,8 +1,6 @@
-
-
 async function updatePlayers() {
     var newPlayers;
-    await fetch('http://localhost:3000/players')
+    await fetch(API_URL + 'players')
         .then((response) => {
             return response.json()
         })
@@ -27,12 +25,12 @@ async function updatePlayers() {
 
 async function updateConsole() {
     var newConsole = [];
-    await fetch('http://localhost:3000/console')
+    await fetch(API_URL + 'console')
         .then((response) => {
             return response.json()
         })
         .then((data) => {
-            newConsole = data;
+            newConsole = data.console;
         }).catch((error) => {
             onAlert(false, 'Cant Connect to Server')
         });
@@ -52,7 +50,7 @@ async function updateConsole() {
 
 async function updateServerLists() {
     var lists;
-    await fetch('http://localhost:3000/lists')
+    await fetch(API_URL + 'lists')
         .then((response) => {
             return response.json()
         })
@@ -67,7 +65,7 @@ async function updateServerLists() {
 
 async function updateServerStats() {
     var stats;
-    await fetch('http://localhost:3000/stats')
+    await fetch(API_URL + 'stats')
         .then((response) => {
             return response.json()
         })

@@ -1,6 +1,9 @@
+const API_URL = 'http://localhost:9867/';
+
 initThemes();
 
 hideAlerts();
+
 function hideAlerts() {
     document.getElementById('alert-suc').style.display = 'none';
     document.getElementById('alert-dan').style.display = 'none';
@@ -8,7 +11,7 @@ function hideAlerts() {
 
 function onAlert(type, message) {
     var element;
-    if(type == 'success' || type == true) {
+    if (type == 'success' || type == true) {
         element = document.getElementById('alert-suc');
     } else {
         element = document.getElementById('alert-dan');
@@ -29,7 +32,7 @@ function checkIfLogged() {
         sendTo('login.html');
     });
 
-    if(!getCookie('auth-token')) {
+    if (!getCookie('auth-token')) {
         sendTo('login.html');
     }
 }
@@ -44,7 +47,7 @@ function sendCommand(command) {
 
 
 function uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0,
             v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);

@@ -6,7 +6,7 @@ async function load() {
 
 async function loadPlayers() {
     var maxPlayers;
-    await fetch('http://localhost:3000/stats')
+    await fetch(API_URL + 'stats')
         .then((response) => {
             return response.json()
         })
@@ -34,7 +34,7 @@ async function loadMotd() {
     var motdLine1;
     var motdLine2;
 
-    await fetch('http://localhost:3000/motd')
+    await fetch(API_URL + 'motd')
         .then((response) => {
             return response.json()
         })
@@ -52,7 +52,7 @@ async function loadMotd() {
 
 async function loadLists() {
 
-    await fetch('http://localhost:3000/lists')
+    await fetch(API_URL + 'lists')
         .then((response) => {
             return response.json()
         })
@@ -103,5 +103,5 @@ function addListedPlayer(name, id, command) {
 function removeListedPlayer(name, id) {
     try {
         document.getElementById(id + '-item-' + name);
-    } catch (error) { }
+    } catch (error) {}
 }
