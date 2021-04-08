@@ -6,7 +6,7 @@ async function load() {
 
 async function loadPlayers() {
     var maxPlayers;
-    await fetch(API_URL + 'stats')
+    await fetch(API_URL + 'stats' + TOKEN_APPENDER)
         .then((response) => {
             return response.json()
         })
@@ -34,7 +34,7 @@ async function loadMotd() {
     var motdLine1;
     var motdLine2;
 
-    await fetch(API_URL + 'motd')
+    await fetch(API_URL + 'motd' + TOKEN_APPENDER)
         .then((response) => {
             return response.json()
         })
@@ -52,7 +52,7 @@ async function loadMotd() {
 
 async function loadLists() {
 
-    await fetch(API_URL + 'lists')
+    await fetch(API_URL + 'lists' + TOKEN_APPENDER)
         .then((response) => {
             return response.json()
         })

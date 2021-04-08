@@ -1,4 +1,7 @@
-const API_URL = 'http://localhost:9867/';
+const API_URL = 'http://localhost:3000/';
+
+// const TOKEN_APPENDER = '&auth-token=' + getCookie('auth-token');
+const TOKEN_APPENDER = '';
 
 initThemes();
 

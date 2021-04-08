@@ -1,6 +1,6 @@
 async function updatePlayers() {
     var newPlayers;
-    await fetch(API_URL + 'players')
+    await fetch(API_URL + 'players' + TOKEN_APPENDER)
         .then((response) => {
             return response.json()
         })
@@ -25,7 +25,7 @@ async function updatePlayers() {
 
 async function updateConsole() {
     var newConsole = [];
-    await fetch(API_URL + 'console')
+    await fetch(API_URL + 'console' + TOKEN_APPENDER)
         .then((response) => {
             return response.json()
         })
@@ -50,7 +50,7 @@ async function updateConsole() {
 
 async function updateServerLists() {
     var lists;
-    await fetch(API_URL + 'lists')
+    await fetch(API_URL + 'lists' + TOKEN_APPENDER)
         .then((response) => {
             return response.json()
         })
@@ -65,7 +65,7 @@ async function updateServerLists() {
 
 async function updateServerStats() {
     var stats;
-    await fetch(API_URL + 'stats')
+    await fetch(API_URL + 'stats' + TOKEN_APPENDER)
         .then((response) => {
             return response.json()
         })
